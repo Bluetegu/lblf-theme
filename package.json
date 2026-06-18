@@ -9,6 +9,12 @@
     },
     "license": "MIT",
     "scripts": {
+        "ghost:install": "npm exec --yes --package=node@22 --package=ghost-cli@latest -- ghost install local --dir tmp/ghost-local --db sqlite3 --url http://localhost:2369 --port 2369 --ip 127.0.0.1 --no-prompt --auto --no-stack --start",
+        "ghost:start": "npm exec --yes --package=node@22 --package=ghost-cli@latest -- ghost start --dir tmp/ghost-local",
+        "ghost:stop": "npm exec --yes --package=node@22 --package=ghost-cli@latest -- ghost stop --dir tmp/ghost-local",
+        "ghost:restart": "npm exec --yes --package=node@22 --package=ghost-cli@latest -- ghost restart --dir tmp/ghost-local",
+        "ghost:status": "npm exec --yes --package=node@22 --package=ghost-cli@latest -- ghost ls --dir tmp/ghost-local",
+        "ghost:logs": "npm exec --yes --package=node@22 --package=ghost-cli@latest -- ghost log --dir tmp/ghost-local",
         "dev": "gulp",
         "zip": "gulp zip",
         "test": "gscan .",

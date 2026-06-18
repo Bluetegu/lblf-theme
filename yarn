@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -eu
+
+# Project-local Yarn wrapper via Corepack (no global install required).
+exec npx -y corepack yarn "$@"
