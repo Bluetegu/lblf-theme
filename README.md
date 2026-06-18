@@ -67,6 +67,28 @@ npm run ghost:logs
 
 Open Ghost admin at `http://localhost:2369/ghost/` and activate the `lblf-theme` theme.
 
+For local development, use a symlinked theme folder so you do not need to upload a zip after each change:
+
+```bash
+# one-time: point Ghost theme folder to this repo
+rm -rf tmp/ghost-local/content/themes/lblf-theme
+ln -s "$PWD" tmp/ghost-local/content/themes/lblf-theme
+npm run ghost:restart
+```
+
+Daily local dev loop:
+
+```bash
+# keep this running while editing
+./yarn dev
+```
+
+- Edit files in this repo
+- Refresh browser at `http://localhost:2369/` or `http://localhost:2369/he/`
+- No zip/re-upload required for local testing
+
+If you upload a theme zip in Ghost Admin, Ghost may replace the symlink with a copied folder. Re-run the symlink commands above to return to live dev mode.
+
 # What To Edit vs Avoid
 
 Modify these files/directories during theme development:
@@ -88,6 +110,27 @@ Before publishing:
 
 - Run `./yarn zip`
 - Upload the generated theme zip from `dist/`
+
+# Production Deployment
+
+Use this flow for production updates:
+
+```bash
+# build fresh artifact
+./yarn zip
+```
+
+1. In Ghost Admin, go to **Settings -> Design -> Change theme**.
+2. Upload the zip from `dist/` (for example `dist/lblf-theme.zip`).
+3. Activate/switch to the uploaded theme version.
+4. In Ghost Admin, go to **Settings -> Labs -> Routes**.
+5. Upload `deployment/routes.he.yaml`.
+
+Notes:
+
+- `deployment/routes.he.yaml` is tracked in git for deployment consistency.
+- `deployment/**` is excluded from theme packaging, so routes are managed separately from the theme zip.
+- Hebrew posts must be tagged with internal tag `#he`.
 
 # PostCSS Features Used
 

@@ -1,9 +1,9 @@
-const {series, watch, src, dest, parallel} = require('gulp');
+const { series, watch, src, dest, parallel } = require('gulp');
 const pump = require('pump');
 const path = require('path');
 const releaseUtils = require('@tryghost/release-utils');
 const inquirer = require('inquirer');
-const {mergeLocales} = require('@tryghost/theme-translations/build');
+const { mergeLocales } = require('@tryghost/theme-translations/build');
 
 // gulp plugins and utils
 const livereload = require('gulp-livereload');
@@ -46,13 +46,13 @@ function hbs(done) {
 
 function css(done) {
     pump([
-        src('assets/css/screen.css', {sourcemaps: true}),
+        src('assets/css/screen.css', { sourcemaps: true }),
         postcss([
             easyimport,
             autoprefixer(),
             cssnano()
         ]),
-        dest('assets/built/', {sourcemaps: '.'}),
+        dest('assets/built/', { sourcemaps: '.' }),
         livereload()
     ], handleError(done));
 }
@@ -63,10 +63,10 @@ function js(done) {
             // pull in lib files first so our own code can depend on it
             'assets/js/lib/*.js',
             'assets/js/*.js'
-        ], {sourcemaps: true}),
+        ], { sourcemaps: true }),
         concat('source.js'),
         uglify(),
-        dest('assets/built/', {sourcemaps: '.'}),
+        dest('assets/built/', { sourcemaps: '.' }),
         livereload()
     ], handleError(done));
 }
@@ -78,6 +78,10 @@ function zipper(done) {
         src([
             '**',
             '!node_modules', '!node_modules/**',
+            '!.corepack', '!.corepack/**',
+            '!.pnpm', '!.pnpm/**',
+            '!deployment', '!deployment/**',
+            '!tmp', '!tmp/**',
             '!dist', '!dist/**',
             '!yarn-error.log',
             '!yarn.lock',

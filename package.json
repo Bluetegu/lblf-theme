@@ -1,5 +1,5 @@
 {
-    "name": "source",
+    "name": "lblf-theme",
     "description": "A default theme for the Ghost publishing platform",
     "demo": "https://source.ghost.io",
     "version": "1.7.1",
@@ -17,9 +17,9 @@
         "ghost:logs": "npm exec --yes --package=node@22 --package=ghost-cli@latest -- ghost log --dir tmp/ghost-local",
         "dev": "gulp",
         "zip": "gulp zip",
-        "test": "gscan .",
-        "test:ci": "gscan --fatal --verbose .",
-        "pretest": "gulp build",
+        "test": "gscan -z dist/lblf-theme.zip",
+        "test:ci": "gscan --fatal --verbose -z dist/lblf-theme.zip",
+        "pretest": "gulp zip",
         "preship": "yarn test",
         "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then yarn version && git push --follow-tags; else echo \"Uncomitted changes found.\" && exit 1; fi",
         "postship": "git fetch && gulp release"

@@ -89,7 +89,9 @@ production stylesheet in assets/built/screen.css
 /* 3. Resets
 /* ---------------------------------------------------------- */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -107,7 +109,11 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
     display: block;
     height: auto;
     max-width: 100%;
@@ -117,19 +123,34 @@ iframe {
     display: block;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
     font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     overflow-wrap: break-word;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     line-height: 1.2;
 }
 
-sub, sup {
+sub,
+sup {
     line-height: 1;
 }
 
@@ -143,7 +164,12 @@ body {
     color: var(--color-primary-text);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--gh-font-heading, var(--font-sans));
 }
 
@@ -280,7 +306,7 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
 
 .gh-header.is-classic.has-image .gh-form-input::placeholder,
 .gh-header.is-classic.has-image button.gh-form-input,
-.gh-header.is-classic.has-image .gh-form > svg {
+.gh-header.is-classic.has-image .gh-form>svg {
     color: rgb(0 0 0 / 0.5);
 }
 
@@ -291,7 +317,7 @@ button.gh-form-input {
     cursor: pointer;
 }
 
-:is(.has-serif-title,.has-mono-title):not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) button.gh-form-input,
+:is(.has-serif-title, .has-mono-title):not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) button.gh-form-input,
 body[class*=" gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-heading-inter):not(.gh-font-heading-manrope):not(.gh-font-heading-noto-sans):not(.gh-font-heading-nunito):not(.gh-font-heading-poppins):not(.gh-font-heading-roboto):not(.gh-font-heading-space-grotesk) button.gh-form-input,
 body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-heading-inter):not(.gh-font-heading-manrope):not(.gh-font-heading-noto-sans):not(.gh-font-heading-nunito):not(.gh-font-heading-poppins):not(.gh-font-heading-roboto):not(.gh-font-heading-space-grotesk) button.gh-form-input {
     padding-inline-start: 50px;
@@ -306,7 +332,7 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
     font-size: inherit;
 }
 
-.gh-form > svg {
+.gh-form>svg {
     position: relative;
     left: 22px;
     width: 20px;
@@ -314,7 +340,7 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
     color: var(--color-secondary-text);
 }
 
-:is(.has-serif-title,.has-mono-title):not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) .gh-form > svg {
+:is(.has-serif-title, .has-mono-title):not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) .gh-form>svg {
     left: 16px;
 }
 
@@ -324,11 +350,11 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
     margin-top: 1px;
 }
 
-.gh-form .gh-button > span:last-child {
+.gh-form .gh-button>span:last-child {
     display: none;
 }
 
-.gh-form:is(.loading, .success) .gh-button > span:first-child {
+.gh-form:is(.loading, .success) .gh-button>span:first-child {
     visibility: hidden;
 }
 
@@ -336,11 +362,11 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
     display: block;
 }
 
-.gh-form.success .gh-button > span:first-child {
+.gh-form.success .gh-button>span:first-child {
     display: none;
 }
 
-.gh-form.success .gh-button > span:last-child {
+.gh-form.success .gh-button>span:last-child {
     display: inline;
 }
 
@@ -400,19 +426,15 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
 
     display: grid;
     grid-template-columns:
-        [full-start] var(--full)
-        [wide-start] var(--wide)
-        [main-start] var(--main) [main-end]
-        var(--wide) [wide-end]
-        var(--full) [full-end];
+        [full-start] var(--full) [wide-start] var(--wide) [main-start] var(--main) [main-end] var(--wide) [wide-end] var(--full) [full-end];
 }
 
-.gh-canvas > * {
+.gh-canvas>* {
     grid-column: main;
 }
 
 .kg-width-wide,
-.kg-content-wide > div {
+.kg-content-wide>div {
     grid-column: wide;
 }
 
@@ -538,7 +560,7 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
         display: none;
     }
 
-    .gh-navigation:not(.is-dropdown-loaded) .gh-navigation-menu .nav > li {
+    .gh-navigation:not(.is-dropdown-loaded) .gh-navigation-menu .nav>li {
         opacity: 0;
     }
 }
@@ -984,7 +1006,7 @@ Search                         LOGO                    Login Subscribe
     margin-top: 8px;
 }
 
-.gh-card-author + .gh-card-date::before {
+.gh-card-author+.gh-card-date::before {
     content: "—";
     margin-right: 4px;
 }
@@ -1010,7 +1032,7 @@ Search                         LOGO                    Login Subscribe
     gap: var(--grid-gap);
 }
 
-.gh-header.is-magazine .gh-header-inner > div {
+.gh-header.is-magazine .gh-header-inner>div {
     display: flex;
     flex-direction: column;
     gap: var(--grid-gap);
@@ -1021,7 +1043,7 @@ Search                         LOGO                    Login Subscribe
     grid-column: 1 / span 4;
 }
 
-.gh-header.is-magazine .gh-header-inner > .gh-card {
+.gh-header.is-magazine .gh-header-inner>.gh-card {
     position: relative;
     grid-column: 5 / span 8;
 }
@@ -1030,34 +1052,34 @@ Search                         LOGO                    Login Subscribe
     grid-column: 13 / -1;
 }
 
-.gh-header.is-magazine .gh-header-inner > .gh-card .gh-card-link {
+.gh-header.is-magazine .gh-header-inner>.gh-card .gh-card-link {
     gap: 28px;
 }
 
-.gh-header.is-magazine .gh-header-inner > .gh-card .gh-card-image {
+.gh-header.is-magazine .gh-header-inner>.gh-card .gh-card-image {
     aspect-ratio: 1.618033;
 }
 
-.gh-header.is-magazine .gh-header-inner > .gh-card .gh-card-tag {
+.gh-header.is-magazine .gh-header-inner>.gh-card .gh-card-tag {
     display: block;
     margin-bottom: 12px;
 }
 
-.gh-header.is-magazine .gh-header-inner > .gh-card .gh-card-title {
+.gh-header.is-magazine .gh-header-inner>.gh-card .gh-card-title {
     font-size: clamp(2.8rem, 1.36vw + 2.25rem, 4rem);
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.022em;
 }
 
-.gh-header.is-magazine .gh-header-inner > .gh-card .gh-card-excerpt {
+.gh-header.is-magazine .gh-header-inner>.gh-card .gh-card-excerpt {
     margin-top: clamp(12px, 0.45vw + 10.18px, 16px);
     font-size: 1.8rem;
     letter-spacing: -0.02em;
     max-width: 90%;
 }
 
-.gh-header.is-magazine .gh-header-inner > .gh-card .gh-card-meta:not(:empty) {
+.gh-header.is-magazine .gh-header-inner>.gh-card .gh-card-meta:not(:empty) {
     margin-top: 14px;
 }
 
@@ -1065,12 +1087,12 @@ Search                         LOGO                    Login Subscribe
     display: none;
 }
 
-.gh-header.is-magazine .gh-header-inner > div .gh-card-excerpt {
+.gh-header.is-magazine .gh-header-inner>div .gh-card-excerpt {
     display: none;
 }
 
-.gh-header.is-magazine .gh-header-inner > .gh-card::before,
-.gh-header.is-magazine .gh-header-inner > .gh-card::after {
+.gh-header.is-magazine .gh-header-inner>.gh-card::before,
+.gh-header.is-magazine .gh-header-inner>.gh-card::after {
     position: absolute;
     top: 0;
     left: calc(var(--grid-gap) / -2);
@@ -1080,12 +1102,12 @@ Search                         LOGO                    Login Subscribe
     background-color: var(--color-border);
 }
 
-.gh-header.is-magazine .gh-header-inner > .gh-card::after {
+.gh-header.is-magazine .gh-header-inner>.gh-card::after {
     right: calc(var(--grid-gap) / -2);
     left: auto;
 }
 
-.gh-header.is-magazine .gh-header-inner > div .gh-card + .gh-card::before {
+.gh-header.is-magazine .gh-header-inner>div .gh-card+.gh-card::before {
     position: absolute;
     top: calc(var(--grid-gap) / -2);
     left: 0;
@@ -1100,7 +1122,7 @@ Search                         LOGO                    Login Subscribe
         grid-template-columns: repeat(12, 1fr);
     }
 
-    .gh-header.is-magazine .gh-header-inner > .gh-card {
+    .gh-header.is-magazine .gh-header-inner>.gh-card {
         grid-column: 1 / span 8;
     }
 
@@ -1108,7 +1130,7 @@ Search                         LOGO                    Login Subscribe
         grid-column: 9 / -1;
     }
 
-    .gh-header.is-magazine .gh-header-inner > div.gh-header-right {
+    .gh-header.is-magazine .gh-header-inner>div.gh-header-right {
         grid-column: 1 / -1;
         grid-row: 2;
         flex-direction: row;
@@ -1164,7 +1186,7 @@ Search                         LOGO                    Login Subscribe
         gap: var(--grid-gap);
     }
 
-    .gh-header.is-magazine .gh-header-inner > div.gh-header-right {
+    .gh-header.is-magazine .gh-header-inner>div.gh-header-right {
         flex-direction: column;
     }
 
@@ -1416,7 +1438,7 @@ Search                         LOGO                    Login Subscribe
     margin-top: max(4vw, 40px);
 }
 
-.gh-header:is(.is-highlight, .is-magazine) + .gh-cta {
+.gh-header:is(.is-highlight, .is-magazine)+.gh-cta {
     display: block;
 }
 
@@ -1437,7 +1459,7 @@ Search                         LOGO                    Login Subscribe
 }
 
 .gh-cta-title {
-    font-size: clamp(2.8rem,1.36vw + 2.25rem,4rem);
+    font-size: clamp(2.8rem, 1.36vw + 2.25rem, 4rem);
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.021em;
@@ -1457,11 +1479,11 @@ Search                         LOGO                    Login Subscribe
     margin-top: 100px;
 }
 
-.gh-navigation + .gh-featured {
+.gh-navigation+.gh-featured {
     margin-top: 64px;
 }
 
-.gh-header.is-classic:not(.has-image) + .gh-featured {
+.gh-header.is-classic:not(.has-image)+.gh-featured {
     margin-top: 0;
 }
 
@@ -1507,7 +1529,7 @@ Search                         LOGO                    Login Subscribe
     }
 }
 
-@container featured-card (240px <= width <= 270px) {
+@container featured-card (240px <=width <=270px) {
     .gh-featured-feed .gh-card-image {
         width: 64px;
     }
@@ -1549,17 +1571,17 @@ Search                         LOGO                    Login Subscribe
 }
 
 @media (max-width: 1199px) {
-    .gh-viewport > .gh-featured .gh-featured-feed {
+    .gh-viewport>.gh-featured .gh-featured-feed {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .gh-viewport > .gh-featured .gh-featured-feed .gh-card:nth-child(4) {
+    .gh-viewport>.gh-featured .gh-featured-feed .gh-card:nth-child(4) {
         display: none;
     }
 }
 
 @media (max-width: 767px) {
-    .gh-viewport > .gh-featured .gh-featured-feed {
+    .gh-viewport>.gh-featured .gh-featured-feed {
         display: flex;
         flex-direction: column;
     }
@@ -1579,15 +1601,15 @@ Search                         LOGO                    Login Subscribe
     column-gap: var(--grid-gap);
 }
 
-:is(.gh-featured, .gh-cta) + .gh-container {
+:is(.gh-featured, .gh-cta)+.gh-container {
     margin-top: max(4vw, 40px);
 }
 
-.gh-header.is-classic:not(.has-image) + .gh-container {
+.gh-header.is-classic:not(.has-image)+.gh-container {
     margin-top: 0;
 }
 
-.gh-navigation + .gh-container .gh-container-title,
+.gh-navigation+.gh-container .gh-container-title,
 :is(.paged, .tag-template, .author-template) .gh-container:not(.has-sidebar) .gh-container-title {
     display: none;
 }
@@ -1605,7 +1627,7 @@ Search                         LOGO                    Login Subscribe
     grid-column: span 12;
 }
 
-.home-template .gh-feed:has(> :nth-child(12):last-child) ~ .gh-more {
+.home-template .gh-feed:has(> :nth-child(12):last-child)~.gh-more {
     display: block;
 }
 
@@ -1656,7 +1678,7 @@ Search                         LOGO                    Login Subscribe
     grid-column: 4 / span 10;
 }
 
-.gh-header:is(.is-highlight, .is-magazine) ~ .gh-container.is-grid:not(.has-sidebar) :is(.gh-container-title, .gh-main, .gh-more) {
+.gh-header:is(.is-highlight, .is-magazine)~.gh-container.is-grid:not(.has-sidebar) :is(.gh-container-title, .gh-main, .gh-more) {
     grid-column: 1 / -1;
 }
 
@@ -1744,7 +1766,7 @@ Search                         LOGO                    Login Subscribe
     margin-top: 6px;
 }
 
-.gh-container.is-list .gh-card + .gh-card::before {
+.gh-container.is-list .gh-card+.gh-card::before {
     position: absolute;
     top: calc(var(--grid-gap) / -2);
     left: 0;
@@ -2078,11 +2100,11 @@ Search                         LOGO                    Login Subscribe
 
 /* 14.3. Page without header */
 
-.page-template .gh-content:only-child > *:first-child:not(.kg-width-full) {
+.page-template .gh-content:only-child>*:first-child:not(.kg-width-full) {
     margin-top: 64px;
 }
 
-.page-template .gh-content > *:last-child:not(.kg-width-full) {
+.page-template .gh-content>*:last-child:not(.kg-width-full) {
     margin-bottom: 6vw;
 }
 
@@ -2103,48 +2125,48 @@ headings, text, images and lists. We deal with cards lower down. */
 }
 
 /* Default vertical spacing */
-.gh-content > * + * {
+.gh-content>*+* {
     margin-top: calc(28px * var(--content-spacing-factor, 1));
     margin-bottom: 0;
 }
 
 /* Remove space between full-width cards */
-.gh-content > .kg-width-full + .kg-width-full:not(.kg-width-full.kg-card-hascaption + .kg-width-full) {
+.gh-content>.kg-width-full+.kg-width-full:not(.kg-width-full.kg-card-hascaption + .kg-width-full) {
     margin-top: 0;
 }
 
 /* Add back a top margin to all headings,
 unless a heading is the very first element in the post content */
-.gh-content > [id]:not(:first-child) {
+.gh-content>[id]:not(:first-child) {
     margin-top: calc(56px * var(--content-spacing-factor, 1));
 }
 
 /* Add drop cap setting */
-.post-template .gh-content.drop-cap > p:first-of-type:first-letter {
-    margin :0 0.2em 0em 0;
+.post-template .gh-content.drop-cap>p:first-of-type:first-letter {
+    margin: 0 0.2em 0em 0;
     font-size: 3.1em;
-    float:left;
+    float: left;
     line-height: 1;
     margin-left: -1px;
     font-weight: 700;
 }
 
-.has-serif-body.post-template:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content.drop-cap > p:first-of-type:first-letter {
+.has-serif-body.post-template:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content.drop-cap>p:first-of-type:first-letter {
     font-size: 3.2em;
 }
 
 /* Add a small margin between a heading and paragraph after it */
-.gh-content > [id] + p {
+.gh-content>[id]+p {
     margin-top: calc(12px * var(--content-spacing-factor, 1));
 }
 
 /* A larger margin before/after dividers, blockquotes and embeds */
-.gh-content > :is(hr, blockquote, iframe) {
+.gh-content> :is(hr, blockquote, iframe) {
     position: relative;
     margin-top: calc(48px * var(--content-spacing-factor, 1)) !important;
 }
 
-.gh-content > :is(hr, blockquote, iframe) + * {
+.gh-content> :is(hr, blockquote, iframe)+* {
     margin-top: calc(48px * var(--content-spacing-factor, 1)) !important;
 }
 
@@ -2170,19 +2192,19 @@ unless a heading is the very first element in the post content */
 }
 
 .gh-content .kg-callout-card .kg-callout-text,
-.gh-content .kg-toggle-card .kg-toggle-content > :is(ul, ol, p) {
+.gh-content .kg-toggle-card .kg-toggle-content> :is(ul, ol, p) {
     font-size: 0.95em;
 }
 
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content > blockquote,
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content > ol,
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content > ul,
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content > dl,
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content > p,
+.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content>blockquote,
+.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content>ol,
+.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content>ul,
+.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content>dl,
+.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content>p,
 .has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content .kg-callout-text,
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content .kg-toggle-content > ol,
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content .kg-toggle-content > ul,
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content .kg-toggle-content > p {
+.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content .kg-toggle-content>ol,
+.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content .kg-toggle-content>ul,
+.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-content .kg-toggle-content>p {
     font-family: var(--font-serif-alt);
 }
 
@@ -2257,7 +2279,7 @@ unless a heading is the very first element in the post content */
     font-family: var(--font-mono);
 }
 
-.gh-content :not(pre) > code {
+.gh-content :not(pre)>code {
     vertical-align: baseline;
     padding: 0.15em 0.4em;
     font-weight: 400;
@@ -2273,19 +2295,19 @@ unless a heading is the very first element in the post content */
 
 /* Add extra margin before/after any cards, except for when immediately preceeded by a heading */
 
-.gh-content :not(.kg-card):not(table):not([id]) + :is(.kg-card, table) {
+.gh-content :not(.kg-card):not(table):not([id])+ :is(.kg-card, table) {
     margin-top: calc(48px * var(--content-spacing-factor, 1));
 }
 
-.gh-content :is(.kg-card, table) + :not(.kg-card):not(table):not([id]) {
+.gh-content :is(.kg-card, table)+ :not(.kg-card):not(table):not([id]) {
     margin-top: calc(48px * var(--content-spacing-factor, 1));
 }
 
-.gh-content :not(.kg-card):not([id]) + .kg-card.kg-width-full {
+.gh-content :not(.kg-card):not([id])+.kg-card.kg-width-full {
     margin-top: calc(68px * var(--content-spacing-factor, 1));
 }
 
-.gh-content .kg-card.kg-width-full + :not(.kg-card):not([id]) {
+.gh-content .kg-card.kg-width-full+ :not(.kg-card):not([id]) {
     margin-top: calc(68px * var(--content-spacing-factor, 1));
 }
 
@@ -2696,7 +2718,7 @@ figcaption a {
     letter-spacing: 0.0005em;
 }
 
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-header.is-magazine .gh-header-inner > .gh-card .gh-card-excerpt,
+.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-header.is-magazine .gh-header-inner>.gh-card .gh-card-excerpt,
 .has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-header.is-highlight .gh-card:first-child .gh-card-excerpt {
     font-size: 1.8rem;
     letter-spacing: -0.001em;
@@ -2705,7 +2727,7 @@ figcaption a {
 .has-serif-title:not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) .gh-header.is-magazine .gh-header-inner>.gh-card .gh-card-title,
 .has-serif-title:not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) .gh-header.is-highlight .gh-header-left .gh-card-title {
     font-weight: 550;
-    font-size: clamp(3.2rem,1.82vw + 2.47rem,4.9rem)
+    font-size: clamp(3.2rem, 1.82vw + 2.47rem, 4.9rem)
 }
 
 .has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-about-description {
@@ -2720,7 +2742,7 @@ figcaption a {
     letter-spacing: 0;
 }
 
-:is(.has-serif-title,.has-mono-title):not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) :is(.gh-button, .gh-form, .gh-form-input),
+:is(.has-serif-title, .has-mono-title):not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) :is(.gh-button, .gh-form, .gh-form-input),
 body[class*=" gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-heading-inter):not(.gh-font-heading-manrope):not(.gh-font-heading-noto-sans):not(.gh-font-heading-nunito):not(.gh-font-heading-poppins):not(.gh-font-heading-roboto):not(.gh-font-heading-space-grotesk) :is(.gh-button, .gh-form, .gh-form-input),
 body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-heading-inter):not(.gh-font-heading-manrope):not(.gh-font-heading-noto-sans):not(.gh-font-heading-nunito):not(.gh-font-heading-poppins):not(.gh-font-heading-roboto):not(.gh-font-heading-space-grotesk) :is(.gh-button, .gh-form, .gh-form-input) {
     border-radius: 0;
@@ -2814,7 +2836,7 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
 }
 
 .gh-footer-signup-header {
-    font-size: calc(clamp(2.8rem,1.36vw + 2.25rem,4rem) * var(--factor, 1));
+    font-size: calc(clamp(2.8rem, 1.36vw + 2.25rem, 4rem) * var(--factor, 1));
     font-weight: 700;
     letter-spacing: -0.03em;
 }
@@ -3051,7 +3073,11 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
     background-size: 264px 88px;
 }
 
-@media (-webkit-min-device-pixel-ratio: 1.1), (-webkit-min-device-pixel-ratio: 1.09375), (min-resolution: 105dpi), (min-resolution: 1.1dppx) {
+@media (-webkit-min-device-pixel-ratio: 1.1),
+(-webkit-min-device-pixel-ratio: 1.09375),
+(min-resolution: 105dpi),
+(min-resolution: 1.1dppx) {
+
     .pswp--svg .pswp__button,
     .pswp--svg .pswp__button--arrow--left::before,
     .pswp--svg .pswp__button--arrow--right::before {
@@ -3177,7 +3203,7 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
     text-transform: uppercase;
 }
 
-.pswp__caption__center .post-caption-meta-item + .post-caption-meta-item::before {
+.pswp__caption__center .post-caption-meta-item+.post-caption-meta-item::before {
     padding: 0 4px;
     content: "\02022";
 }
@@ -3385,4 +3411,83 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
 
 .gh-button-share:hover {
     border-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   Hebrew RTL Overrides
+   ========================================================================== */
+html[dir="rtl"] body {
+    direction: rtl;
+    text-align: right;
+    font-family: "Assistant", "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html[dir="rtl"] .gh-navigation-inner,
+html[dir="rtl"] .gh-container-inner,
+html[dir="rtl"] .gh-archive-inner,
+html[dir="rtl"] .gh-article-meta,
+html[dir="rtl"] .gh-meta-share {
+    direction: rtl;
+}
+
+html[dir="rtl"] .gh-navigation-actions {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+html[dir="rtl"] .gh-navigation-members {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .gh-navigation-members a+.gh-button {
+    margin-right: 16px;
+    margin-left: 0;
+}
+
+html[dir="rtl"] .gh-article-author-image {
+    margin-left: 12px;
+    margin-right: 0;
+}
+
+html[dir="rtl"] .gh-content blockquote {
+    border-right: 4px solid var(--ghost-accent-color);
+    border-left: 0;
+    padding-right: 2rem;
+    padding-left: 0;
+}
+
+html[dir="rtl"] .gh-content,
+html[dir="rtl"] .gh-article-excerpt,
+html[dir="rtl"] .gh-feed,
+html[dir="rtl"] .gh-container-title {
+    text-align: right;
+}
+
+html[dir="rtl"] .gh-content a,
+html[dir="rtl"] .gh-content code,
+html[dir="rtl"] .gh-content pre,
+html[dir="rtl"] .gh-article-title,
+html[dir="rtl"] .gh-article-excerpt {
+    overflow-wrap: anywhere;
+}
+
+html[dir="rtl"] .gh-more svg,
+html[dir="rtl"] .gh-button svg {
+    transform: scaleX(-1);
+}
+
+@media screen and (max-width: 767px) {
+    html[dir="rtl"] .gh-navigation-menu {
+        text-align: right;
+    }
+
+    html[dir="rtl"] .gh-navigation-members {
+        justify-content: flex-start;
+    }
+
+    html[dir="rtl"] .gh-article-meta-content,
+    html[dir="rtl"] .gh-meta-share {
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
 }
