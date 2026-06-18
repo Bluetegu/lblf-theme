@@ -529,6 +529,61 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
     white-space: nowrap;
 }
 
+.gh-language-switcher {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    padding: 4px;
+    border-radius: 999px;
+    background-color: var(--color-lighter-gray);
+    direction: ltr;
+}
+
+.gh-language-switcher a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 56px;
+    height: 32px;
+    padding: 0 12px;
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 999px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.gh-language-switcher a:hover {
+    opacity: 1;
+    background-color: rgb(0 0 0 / 0.06);
+}
+
+.gh-language-switcher a.is-active {
+    color: #fff !important;
+    background-color: var(--ghost-accent-color);
+}
+
+.gh-navigation.has-accent-color .gh-language-switcher {
+    background-color: rgb(255 255 255 / 0.2);
+}
+
+.gh-navigation.has-accent-color .gh-language-switcher a {
+    color: #fff;
+}
+
+.gh-navigation.has-accent-color .gh-language-switcher a:hover {
+    background-color: rgb(255 255 255 / 0.2);
+}
+
+.gh-navigation.has-accent-color .gh-language-switcher a.is-active {
+    color: #15171a !important;
+    background-color: #fff;
+}
+
+.gh-language-switcher-mobile {
+    display: none;
+}
+
 .gh-navigation-members .gh-button {
     font-size: inherit;
     font-weight: 600;
@@ -544,6 +599,29 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
         white-space: normal;
     }
 
+    .gh-language-switcher-desktop {
+        display: none;
+    }
+
+    .gh-language-switcher-mobile {
+        display: inline-flex;
+        margin-right: 4px;
+        padding: 1px;
+        gap: 3px;
+    }
+
+    #gh-navigation .gh-language-switcher-mobile a {
+        min-width: 30px;
+        height: 24px;
+        padding: 0 5px;
+        font-size: 1rem;
+    }
+
+    #gh-navigation .gh-language-switcher-mobile a[data-lang="he"] {
+        min-width: 26px;
+        padding: 0 4px;
+    }
+
     .gh-navigation-members {
         flex-direction: column-reverse;
         gap: 16px;
@@ -557,6 +635,10 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
 
 @media (min-width: 768px) {
     .gh-navigation-brand .gh-search {
+        display: none;
+    }
+
+    .gh-language-switcher-mobile {
         display: none;
     }
 
@@ -800,7 +882,7 @@ Search                         LOGO                    Login Subscribe
 
     #gh-navigation .gh-navigation-brand {
         display: grid;
-        grid-template-columns: 1fr auto auto;
+        grid-template-columns: 1fr auto auto auto;
         grid-column-start: 1;
         align-items: center;
         height: 64px;

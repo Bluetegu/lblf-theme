@@ -15,6 +15,38 @@
     });
 })();
 
+/* Language switcher active state */
+(function () {
+    const pathName = window.location.pathname || '/';
+    const isHebrewPath = pathName === '/he/' || pathName.indexOf('/he/') === 0;
+    const activeLang = isHebrewPath ? 'he' : 'en';
+
+    document.querySelectorAll('.gh-language-switcher a').forEach(function (link) {
+        if (link.getAttribute('data-lang') === activeLang) {
+            link.classList.add('is-active');
+            link.setAttribute('aria-current', 'page');
+        }
+    });
+})();
+
+/* Keep nav Home links on Hebrew collection */
+(function () {
+    const pathName = window.location.pathname || '/';
+    const isHebrewPath = pathName === '/he/' || pathName.indexOf('/he/') === 0;
+    if (!isHebrewPath) return;
+
+    const origin = window.location.origin;
+
+    document.querySelectorAll('.gh-navigation .nav a').forEach(function (link) {
+        const href = link.getAttribute('href');
+        if (!href) return;
+
+        if (href === '/' || href === origin + '/' || href === window.location.host + '/') {
+            link.setAttribute('href', '/he/');
+        }
+    });
+})();
+
 /* Add lightbox to gallery images */
 (function () {
     lightbox(
