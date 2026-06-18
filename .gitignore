@@ -20,9 +20,12 @@ package-lock.json
 projectFilesBackup
 
 .DS_Store
-
-dist/
+.DS_store
 
 config.json
 changelog.md
 changelog.md.bk
+
+tmp/
+.corepack/
+dist/
