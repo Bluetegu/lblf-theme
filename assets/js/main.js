@@ -131,6 +131,7 @@
             replaceMatchingText('.gh-footer-signup-subhead', englishDescription, hebrewDescription);
             replaceMatchingText('.gh-cta-title', englishTitle, hebrewTitle);
             replaceMatchingText('.gh-cta-description', englishDescription, hebrewDescription);
+            replaceMatchingText('.gh-container-title', 'Read more', translations['Read more']);
 
             if (hebrewTitle && englishTitle && document.title.indexOf(englishTitle) !== -1) {
                 document.title = document.title.replace(englishTitle, hebrewTitle);
