@@ -8,9 +8,11 @@ Parameters:
 * latestLabel (optional heading label)
 * seeAllLabel (optional pagination label)
 * seeAllUrl (optional pagination URL)
+* siteTitle (optional site title override)
+* siteDescription (optional site description override)
 --}}
 
-<section class="gh-container is-{{#match postFeedStyle " List"}}list{{else}}grid{{/match}}{{#if showSidebar}}
+<section class="gh-container is-{{#match postFeedStyle "List"}}list{{else}}grid{{/match}}{{#if showSidebar}}
     has-sidebar{{/if}}{{#unless @custom.show_images_in_feed}} no-image{{/unless}} gh-outer">
     <div class="gh-container-inner gh-inner">
 
@@ -136,11 +138,17 @@ Parameters:
             <div class="gh-sidebar-inner">
                 <section class="gh-about">
                     {{#if @site.icon}}
-                    <img class="gh-about-icon" src="{{@site.icon}}" alt="{{@site.title}}" loading="lazy">
+                    <img class="gh-about-icon" src="{{@site.icon}}"
+                        alt="{{#if siteTitle}}{{siteTitle}}{{else}}{{@site.title}}{{/if}}" loading="lazy">
                     {{/if}}
-                    <h3 class="gh-about-title is-title">{{@site.title}}</h3>
+                    <h3 class="gh-about-title is-title">{{#if siteTitle}}{{siteTitle}}{{else}}{{@site.title}}{{/if}}
+                    </h3>
+                    {{#if siteDescription}}
+                    <p class="gh-about-description is-body">{{siteDescription}}</p>
+                    {{else}}
                     {{#if @site.description}}
                     <p class="gh-about-description is-body">{{@site.description}}</p>
+                    {{/if}}
                     {{/if}}
                     {{#if @site.members_enabled}}
                     {{#unless @member}}

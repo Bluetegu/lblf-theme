@@ -1,13 +1,12 @@
-{{!< default}} {{!-- Hebrew homepage variant --}} {{> "components/header" headerStyle=@custom.header_style
-    postFilter="tag:[hash-he]" featuredLabel="מומלץ"}}
+{{!< default}}
+{{!-- Hebrew homepage variant --}}
 
-    {{#match @custom.header_style "!=" "Highlight"}}
-    {{> "components/featured" showFeatured=@custom.show_featured_posts limit=4 postFilter="tag:[hash-he]"
-    titleLabel="מומלץ"}}
-    {{/match}}
+{{> "components/header" headerStyle=@custom.header_style postFilter="tag:[hash-he]" featuredLabel="מומלץ"}}
 
-    {{> "components/cta"}}
+{{#match @custom.header_style "!=" "Highlight"}}
+    {{> "components/featured" showFeatured=@custom.show_featured_posts limit=4 postFilter="tag:[hash-he]" titleLabel="מומלץ"}}
+{{/match}}
 
-    {{> "components/post-list" feed="home" postFeedStyle=@custom.post_feed_style showTitle=true
-    showSidebar=@custom.show_publication_info_sidebar postFilter="tag:[hash-he]" latestLabel="האחרונים" seeAllLabel="הצג
-    הכל" seeAllUrl="/he/page/2/"}}
+{{> "components/cta"}}
+
+{{> "components/post-list" feed="home" postFeedStyle=@custom.post_feed_style showTitle=true showSidebar=@custom.show_publication_info_sidebar postFilter="tag:[hash-he]" latestLabel="האחרונים" seeAllLabel="הצג הכל" seeAllUrl="/he/page/2/"}}

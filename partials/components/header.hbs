@@ -1,18 +1,22 @@
 {{#match headerStyle "!=" "Off"}}
 
 {{#match headerStyle "Highlight"}}
-{{> "components/header-content" postFilter=postFilter featuredLabel=featuredLabel}}
+{{> "components/header-content" postFilter=postFilter featuredLabel=featuredLabel siteTitle=siteTitle
+siteDescription=siteDescription}}
 {{else match headerStyle "Magazine"}}
-{{> "components/header-content" postFilter=postFilter featuredLabel=featuredLabel}}
+{{> "components/header-content" postFilter=postFilter featuredLabel=featuredLabel siteTitle=siteTitle
+siteDescription=siteDescription}}
 {{else}}
 {{#match headerStyle "Landing"}}
 {{#if @site.members_enabled}}
 {{#unless @member}}
-{{> "components/header-content" postFilter=postFilter featuredLabel=featuredLabel}}
+{{> "components/header-content" postFilter=postFilter featuredLabel=featuredLabel siteTitle=siteTitle
+siteDescription=siteDescription}}
 {{/unless}}
 {{/if}}
 {{else}}
-{{> "components/header-content" postFilter=postFilter featuredLabel=featuredLabel}}
+{{> "components/header-content" postFilter=postFilter featuredLabel=featuredLabel siteTitle=siteTitle
+siteDescription=siteDescription}}
 {{/match}}
 {{/match}}
 

@@ -1,13 +1,12 @@
-{{!< default}} {{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
-    {{> "components/header" headerStyle=@custom.header_style postFilter="tag:-[hash-he]" featuredLabel=(t "Featured")}}
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
 
-    {{#match @custom.header_style "!=" "Highlight"}}
-    {{> "components/featured" showFeatured=@custom.show_featured_posts limit=4 postFilter="tag:-[hash-he]" titleLabel=(t
-    "Featured")}}
-    {{/match}}
+{{> "components/header" headerStyle=@custom.header_style postFilter="tag:-[hash-he]" featuredLabel=(t "Featured")}}
 
-    {{> "components/cta"}}
+{{#match @custom.header_style "!=" "Highlight"}}
+    {{> "components/featured" showFeatured=@custom.show_featured_posts limit=4 postFilter="tag:-[hash-he]" titleLabel=(t "Featured")}}
+{{/match}}
 
-    {{> "components/post-list" feed="home" postFeedStyle=@custom.post_feed_style showTitle=true
-    showSidebar=@custom.show_publication_info_sidebar postFilter="tag:-[hash-he]" latestLabel=(t "Latest")
-    seeAllLabel=(t "See all") seeAllUrl="/page/2/"}}
+{{> "components/cta"}}
+
+{{> "components/post-list" feed="home" postFeedStyle=@custom.post_feed_style showTitle=true showSidebar=@custom.show_publication_info_sidebar postFilter="tag:-[hash-he]" latestLabel=(t "Latest") seeAllLabel=(t "See all") seeAllUrl="/page/2/"}}

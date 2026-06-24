@@ -18,30 +18,34 @@
         {{/if}}
         <div class="gh-card-wrapper">
             {{#if primary_tag}}
-                <p class="gh-card-tag">{{primary_tag.name}}</p>
+            <p class="gh-card-tag">{{primary_tag.name}}</p>
             {{/if}}
             <h3 class="gh-card-title is-title">{{title}}</h3>
             {{#if custom_excerpt}}
-                <p class="gh-card-excerpt is-body">{{custom_excerpt}}</p>
+            <p class="gh-card-excerpt is-body">{{custom_excerpt}}</p>
             {{/if}}
             {{#unless custom_excerpt}}
-                {{#if excerpt}}
-                    <p class="gh-card-excerpt is-body">{{excerpt}}</p>
-                {{/if}}
+            {{#if excerpt}}
+            <p class="gh-card-excerpt is-body">{{excerpt}}</p>
+            {{/if}}
             {{/unless}}
             <footer class="gh-card-meta">
                 {{#unless access}}
-                    {{^has visibility="public"}}
-                        {{> "icons/lock"}}
-                    {{/has}}
+                {{^has visibility="public"}}
+                {{> "icons/lock"}}
+                {{/has}}
                 {{/unless}}<!--
-             -->{{#if @custom.show_author}}
-                    <span class="gh-card-author">{{{t "By {authors}" authors=(authors autolink="false" separator=", ") }}}</span>
+             -->
+                {{#if @custom.show_author}}
+                <span class="gh-card-author">{{{t "By {authors}" authors=(authors autolink="false" separator=", ")
+                    }}}</span>
                 {{/if}}
                 {{#if @custom.show_publish_date}}
-                    <time class="gh-card-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
-                {{/if}}<!--
-         --></footer>
+                <time class="gh-card-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
+                {{/if}}
+                <!--
+         -->
+            </footer>
         </div>
     </a>
 </article>

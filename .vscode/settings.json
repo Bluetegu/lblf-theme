@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.hbs": "handlebars"
+    },
+    "[handlebars]": {
+        "editor.formatOnSave": false,
+        "editor.formatOnPaste": false,
+        "editor.formatOnType": false
+    }
+}
