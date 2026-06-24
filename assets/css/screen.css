@@ -325,7 +325,7 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
 
 .gh-form .gh-button {
     position: absolute;
-    right: 6px;
+    inset-inline-end: 6px;
     min-width: 132px;
     padding-inline: 24px;
     height: 44px;
@@ -2935,6 +2935,7 @@ body[class^="gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-head
 
 .gh-footer-signup .gh-form {
     margin-top: 40px;
+    margin-inline: auto;
 }
 
 @media (max-width: 991px) {
@@ -3543,6 +3544,20 @@ html[dir="rtl"] .gh-article-excerpt,
 html[dir="rtl"] .gh-feed,
 html[dir="rtl"] .gh-container-title {
     text-align: right;
+}
+
+html[dir="rtl"] .gh-footer-copyright {
+    width: 100%;
+    text-align: left;
+}
+
+html[dir="rtl"] form[data-members-form].gh-form {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="rtl"] form[data-members-form].gh-form .gh-form-input {
+    text-align: left;
 }
 
 html[dir="rtl"] .gh-content a,

@@ -1,3 +1,6 @@
 tmp/
 node_modules
 .corepack/
+.DS_Store
+.DS_store
+dist/

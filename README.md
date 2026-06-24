@@ -147,6 +147,28 @@ You can add your own SVG icons in the same manner.
 
 Please see [@TryGhost/Themes/theme-translations/README.md](https://github.com/TryGhost/Themes/blob/main/packages/theme-translations/README.md) for how to build, edit, or contribute translations.
 
+## Hebrew Branding Assets
+
+Hebrew route branding is configured in theme files, not in Ghost Admin custom settings.
+
+To change the Hebrew publication title and description:
+
+1. Edit `locales/he.json`
+2. Set the values for:
+   - `"Site Title"`
+   - `"Site Description"`
+
+To change the Hebrew logo:
+
+1. Add or replace the file at `assets/images/logo-he.png`
+2. The theme will use this logo on `/he/` pages only
+3. If the file is missing, the theme falls back to the default site logo/title
+
+After changing Hebrew assets or translations:
+
+1. Run `./yarn dev` for local watch mode, or `./yarn pretest` for a one-time rebuild
+2. Refresh `http://localhost:2369/he/`
+
 # Copyright & License
 
 Copyright (c) 2013-2026 Ghost Foundation - Released under the [MIT license](LICENSE).

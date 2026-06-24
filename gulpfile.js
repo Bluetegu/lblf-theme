@@ -71,6 +71,13 @@ function js(done) {
     ], handleError(done));
 }
 
+function copyThemeLocales(done) {
+    pump([
+        src('locales/*.json'),
+        dest('assets/built/locales/')
+    ], handleError(done));
+}
+
 function zipper(done) {
     const filename = require('./package.json').name + '.zip';
 
@@ -95,9 +102,10 @@ function zipper(done) {
 const cssWatcher = () => watch('assets/css/**', css);
 const jsWatcher = () => watch('assets/js/**', js);
 const hbsWatcher = () => watch(['*.hbs', 'partials/**/*.hbs'], hbs);
+const themeLocalesWatcher = () => watch('locales/*.json', copyThemeLocales);
 const localesWatcher = () => watch('./locales-local/**/*.json', mergeLocales());
-const watcher = parallel(cssWatcher, jsWatcher, hbsWatcher, localesWatcher);
-const build = series(css, js, mergeLocales());
+const watcher = parallel(cssWatcher, jsWatcher, hbsWatcher, themeLocalesWatcher, localesWatcher);
+const build = series(css, js, copyThemeLocales, mergeLocales());
 
 exports.build = build;
 exports.zip = series(build, zipper);

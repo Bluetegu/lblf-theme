@@ -1,5 +1,4 @@
-<section class="gh-header is-{{#match headerStyle " Magazine"}}magazine{{else match headerStyle "Highlight"
-    }}highlight{{else}}classic{{/match}}{{#if @custom.background_image}}{{#if @site.cover_image}}
+<section class="gh-header is-{{#match headerStyle "Magazine"}}magazine{{else match headerStyle "Highlight"}}highlight{{else}}classic{{/match}}{{#if @custom.background_image}}{{#if @site.cover_image}}
     has-image{{/if}}{{/if}} gh-outer">
 
     {{!-- Background image --}}
@@ -7,7 +6,8 @@
     {{#match headerStyle "!=" "Magazine"}}
     {{#match headerStyle "!=" "Highlight"}}
     {{#if @site.cover_image}}
-    <img class="gh-header-image" src="{{@site.cover_image}}" alt="{{@site.title}}">
+    <img class="gh-header-image" src="{{@site.cover_image}}"
+        alt="{{#if siteTitle}}{{siteTitle}}{{else}}{{@site.title}}{{/if}}">
     {{/if}}
     {{/match}}
     {{/match}}
@@ -118,14 +118,15 @@
         {{!-- Landing layout --}}
         {{#match headerStyle "Landing"}}
         <h1 class="gh-header-title is-title">{{#if
-            @custom.header_text}}{{@custom.header_text}}{{else}}{{@site.description}}{{/if}}</h1>
-        {{> "email-subscription" email_field_id="header-email"}}
+            @custom.header_text}}{{@custom.header_text}}{{else}}{{#if
+            siteDescription}}{{siteDescription}}{{else}}{{@site.description}}{{/if}}{{/if}}</h1>
         {{/match}}
 
         {{!-- Search layout --}}
         {{#match headerStyle "Search"}}
         <h1 class="gh-header-title is-title">{{#if
-            @custom.header_text}}{{@custom.header_text}}{{else}}{{@site.description}}{{/if}}</h1>
+            @custom.header_text}}{{@custom.header_text}}{{else}}{{#if
+            siteDescription}}{{siteDescription}}{{else}}{{@site.description}}{{/if}}{{/if}}</h1>
         <form class="gh-form">
             {{> "icons/search"}}
             <button class="gh-form-input" data-ghost-search>{{t "Search posts, tags and authors"}}</button>
