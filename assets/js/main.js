@@ -1,3 +1,7 @@
+function isHebrewPathname(pathName) {
+    return /^\/he(?:\/|$)/.test(pathName || '/');
+}
+
 /* Mobile menu burger toggle */
 (function () {
     const navigation = document.querySelector('.gh-navigation');
@@ -38,7 +42,7 @@
 /* Language switcher active state */
 (function () {
     const pathName = window.location.pathname || '/';
-    const isHebrewPath = pathName === '/he/' || pathName.indexOf('/he/') === 0;
+    const isHebrewPath = isHebrewPathname(pathName);
     const activeLang = isHebrewPath ? 'he' : 'en';
 
     document.querySelectorAll('.gh-language-switcher a').forEach(function (link) {
@@ -52,7 +56,7 @@
 /* Keep nav Home links on Hebrew collection */
 (function () {
     const pathName = window.location.pathname || '/';
-    const isHebrewPath = pathName === '/he/' || pathName.indexOf('/he/') === 0;
+    const isHebrewPath = isHebrewPathname(pathName);
     if (!isHebrewPath) return;
 
     const origin = window.location.origin;
@@ -65,12 +69,16 @@
             link.setAttribute('href', '/he/');
         }
     });
+
+    document.querySelectorAll('.gh-navigation-logo').forEach(function (logoLink) {
+        logoLink.setAttribute('href', '/he/');
+    });
 })();
 
 /* Apply Hebrew branding overrides */
 (function () {
     const pathName = window.location.pathname || '/';
-    const isHebrewPath = pathName === '/he/' || pathName.indexOf('/he/') === 0;
+    const isHebrewPath = isHebrewPathname(pathName);
     if (!isHebrewPath || !document.body) return;
 
     const englishTitle = (document.body.dataset.siteTitle || '').trim();
@@ -126,6 +134,9 @@
             }
         });
     }
+
+    replaceBrandLogo('.gh-navigation-logo', '');
+    replaceBrandLogo('.gh-footer-logo', '');
 
     if (!localeUrl) return;
 
