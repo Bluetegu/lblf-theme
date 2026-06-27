@@ -159,6 +159,17 @@ To change the Hebrew publication title and description:
    - `"Site Title"`
    - `"Site Description"`
 
+Hebrew home page social share metadata (title/description) is hardcoded in `default.hbs` for the `/he/` route.
+
+To change those share strings:
+
+1. Edit `default.hbs`
+2. In the `<head>` block, find the `{{#match (canonical_url) (concat @site.url "/he/")}}` section
+3. Update the hardcoded values for:
+   - `<title>...`
+   - `og:title` / `twitter:title`
+   - `og:description` / `twitter:description`
+
 To change the Hebrew logo:
 
 1. Add or replace the file at `assets/images/logo-he.png`
