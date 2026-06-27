@@ -93,7 +93,7 @@ function zipper(done) {
             '!yarn-error.log',
             '!yarn.lock',
             '!gulpfile.js'
-        ]),
+        ], { encoding: false }),
         zip(filename),
         dest('dist/')
     ], handleError(done));

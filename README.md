@@ -124,12 +124,13 @@ Use this flow for production updates:
 2. Upload the zip from `dist/` (for example `dist/lblf-theme.zip`).
 3. Activate/switch to the uploaded theme version.
 4. In Ghost Admin, go to **Settings -> Labs -> Routes**.
-5. Upload `deployment/routes.he.yaml`.
+5. Upload `routes.yaml` from the repository root.
 
 Notes:
 
-- `deployment/routes.he.yaml` is tracked in git for deployment consistency.
-- `deployment/**` is excluded from theme packaging, so routes are managed separately from the theme zip.
+- `routes.yaml` is tracked in git for deployment consistency.
+- Route config is not bundled or applied automatically by theme zip uploads.
+- If `/he/` returns 404 after uploading a theme, upload `routes.yaml` in Ghost Admin and retry.
 - Hebrew posts must be tagged with internal tag `#he`.
 
 # PostCSS Features Used

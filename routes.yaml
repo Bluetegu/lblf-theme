@@ -1,0 +1,20 @@
+routes:
+
+collections:
+  /:
+    permalink: /{slug}/
+    template:
+      - home
+      - index
+    filter: tag:-hash-he
+
+  /he/:
+    permalink: /he/{slug}/
+    template:
+      - home-he
+      - index-he
+    filter: tag:hash-he
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/
