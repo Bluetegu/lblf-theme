@@ -3578,6 +3578,10 @@ html[dir="rtl"] .gh-button svg {
         text-align: right;
     }
 
+    html[dir="rtl"] .gh-footer-copyright {
+        text-align: center;
+    }
+
     html[dir="rtl"] .gh-navigation-members {
         justify-content: flex-start;
     }
