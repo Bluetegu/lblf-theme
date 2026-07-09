@@ -3,33 +3,20 @@
 
 <head>
 
-    {{!-- Basic meta - advanced meta is output with {{ghost_head}} below --}}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="fb:app_id" content="1044842904897984">
+
+    {{!-- Title only - all OG/social meta is handled by {{ghost_head}} and the Hebrew override below --}}
     {{#match pagination.page "=" 1}}
     {{^is "home,post,page,tag,author"}}
     <title>העבר הוא המפתח לעתיד</title>
-    <meta property="og:title" content="העבר הוא המפתח לעתיד">
-    <meta name="twitter:title" content="העבר הוא המפתח לעתיד">
-    <meta property="og:description" content="כדוריד, היסטוריה ומשפחה">
-    <meta name="twitter:description" content="כדוריד, היסטוריה ומשפחה">
-    {{#if @site.cover_image}}
-    <meta property="og:image" content="{{img_url @site.cover_image}}">
-    <meta name="twitter:image" content="{{img_url @site.cover_image}}">
     {{else}}
-    {{#if @site.logo}}
-    <meta property="og:image" content="{{img_url @site.logo}}">
-    <meta name="twitter:image" content="{{img_url @site.logo}}">
-    {{/if}}
-    {{/if}}
-    {{else}}
-    <meta property="og:title" content="{{meta_title page=""}}">
-    <meta name="twitter:title" content="{{meta_title page=""}}">
     <title>{{meta_title page=""}}</title>
     {{/is}}
     {{else}}
     <title>{{meta_title page=(t " (Page %)")}}</title>
     {{/match}}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {{!-- Preload main styles and scripts for better performance --}}
     <link rel="preload" as="style" href="{{asset "built/screen.css"}}">
@@ -78,6 +65,25 @@
 
     {{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings --}}
     {{ghost_head}}
+    {{!-- Hebrew OG override: must be after ghost_head so these take precedence over Ghost's generated English tags --}}
+    {{#match pagination.page "=" 1}}
+    {{^is "home,post,page,tag,author"}}
+    <meta property="og:title" content="העבר הוא המפתח לעתיד">
+    <meta name="twitter:title" content="העבר הוא המפתח לעתיד">
+    <meta property="og:description" content="כדוריד, היסטוריה ומשפחה">
+    <meta name="twitter:description" content="כדוריד, היסטוריה ומשפחה">
+    <meta property="og:locale" content="he_IL">
+    {{#if @site.cover_image}}
+    <meta property="og:image" content="{{img_url @site.cover_image}}">
+    <meta name="twitter:image" content="{{img_url @site.cover_image}}">
+    {{else}}
+    {{#if @site.logo}}
+    <meta property="og:image" content="{{img_url @site.logo}}">
+    <meta name="twitter:image" content="{{img_url @site.logo}}">
+    {{/if}}
+    {{/if}}
+    {{/is}}
+    {{/match}}
 
 </head>
 
