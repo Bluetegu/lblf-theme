@@ -1,4 +1,8 @@
-<footer class="gh-footer{{#match @custom.header_and_footer_color "Accent color"}} has-accent-color{{/match}} gh-outer">
+{{!-- Accent color for header/footer is a code-only setting for forkers, not a Ghost Admin
+      field (kept out of config.custom to stay under gscan's 20-setting limit) - flip the literal
+      below to `true` for the accent-color look, `false` for the plain background. See README.md,
+      "Settings moved to code". --}}
+<footer class="gh-footer{{#if false}} has-accent-color{{/if}} gh-outer">
     <div class="gh-footer-inner gh-inner">
 
         {{#if @site.members_enabled}}

@@ -1,0 +1,50 @@
+{{!-- Remark42 comments widget. Locale follows the post's own language, same #he tag post.hbs
+      already uses to pick related articles, so it needs no manual per-post setting.
+      host/site_id come from Ghost Admin custom settings, not a hardcoded value here - this repo
+      is public, so nothing identifying the backend belongs in a tracked file. --}}
+{{#if @custom.show_comments}}
+<div class="gh-comments gh-canvas">
+    {{#has tag="#he"}}
+    <h3 class="gh-comments-title">
+        תגובות
+    </h3>
+    <p dir="ltr" class="gh-comments-intro">
+        מזהים שחקן או מיקום? יש לכם סיפור על המסע הזה? נשמח אם תשתפו את הידע שלכם כאן למטה. אפשר להגיב באמצעות כינוי בלבד – אין צורך בהרשמה או בחשבון
+    </p>
+    {{else}}
+    <h3 class="gh-comments-title">
+        Leave a Comment
+    </h3>
+    <p class="gh-comments-intro">
+        Do you recognize a player, a location, or have a story about this tour? Please share your knowledge below. You can comment using just a nickname—no account required.
+    </p>
+    {{/has}}
+    <div id="remark42">{{t "Loading comments…"}}</div>
+    <script>
+        // local Ghost dev talks to a local Remark42 backend instead of the configured one, so
+        // theming/testing doesn't depend on Ghost Admin settings or the real backend being up.
+        // HTTPS (self-signed) because SameSite=None/Secure auth cookies never get stored over
+        // plain HTTP, even cross-origin loopback - visit https://127.0.0.1:8443/web/ once and
+        // accept the certificate warning before relying on sign-in here. See README.md.
+        var isLocalDev = /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
+        var remark_config = {
+            host: isLocalDev ? 'https://127.0.0.1:8443' : '{{@custom.remark42_host}}',
+            site_id: isLocalDev ? 'local' : '{{@custom.remark42_site_id}}',
+            url: window.location.origin + window.location.pathname,
+            locale: '{{#has tag="#he"}}he{{else}}en{{/has}}',
+            page_title: document.title,
+            // widget-side theming without forking/rebuilding Remark42: custom_properties sets
+            // any --custom-property the widget's stylesheets declare on its own document.
+            // --font-family only exists because of a small upstream change adding it as an
+            // overridable property (defaulting to the original value) - see remark42's
+            // app/styles/global.css / custom-properties.css. Nothing else here needs a remark42
+            // rebuild. custom_properties is the current name for this (__colors__ still works as
+            // a deprecated alias, but this repo tracks upstream's naming going forward).
+            custom_properties: {
+                '--font-family': 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
+            }
+        };
+    </script>
+    <script>!function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),d=n.head||n.body;r.type="module",r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+".mjs",d.appendChild(r)}}(remark_config.components||["embed"],document);</script>
+</div>
+{{/if}}
