@@ -1,8 +1,12 @@
-<section class="gh-header is-{{#match headerStyle "Magazine"}}magazine{{else match headerStyle "Highlight"}}highlight{{else}}classic{{/match}}{{#if @custom.background_image}}{{#if @site.cover_image}}
+{{!-- Background image is a code-only setting for forkers, not a Ghost Admin field (kept out
+     of config.custom to stay under gscan's 20-setting limit) - flip the two literals below
+     together (`true` shows the site's cover image on Landing/Search headers, `false` hides it).
+     See README.md, "Settings moved to code". --}}
+<section class="gh-header is-{{#match headerStyle "Magazine"}}magazine{{else match headerStyle "Highlight"}}highlight{{else}}classic{{/match}}{{#if true}}{{#if @site.cover_image}}
     has-image{{/if}}{{/if}} gh-outer">
 
     {{!-- Background image --}}
-    {{#if @custom.background_image}}
+    {{#if true}}
     {{#match headerStyle "!=" "Magazine"}}
     {{#match headerStyle "!=" "Highlight"}}
     {{#if @site.cover_image}}

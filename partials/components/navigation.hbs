@@ -1,4 +1,6 @@
-<header id="gh-navigation" class="gh-navigation is-{{#match navigationLayout "Logo on the left"}}left-logo{{else match navigationLayout "Stacked"}}stacked{{else}}middle-logo{{/match}}{{#match @custom.header_and_footer_color "Accent color"}} has-accent-color{{/match}} gh-outer">
+{{!-- Accent color for header/footer is a code-only setting for forkers - see footer.hbs and
+      README.md, "Settings moved to code". Keep this literal in sync with footer.hbs's. --}}
+<header id="gh-navigation" class="gh-navigation is-{{#match navigationLayout "Logo on the left"}}left-logo{{else match navigationLayout "Stacked"}}stacked{{else}}middle-logo{{/match}}{{#if false}} has-accent-color{{/if}} gh-outer">
     <div class="gh-navigation-inner gh-inner">
 
         <div class="gh-navigation-brand">

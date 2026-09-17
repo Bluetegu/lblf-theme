@@ -181,6 +181,254 @@ After changing Hebrew assets or translations:
 1. Run `./yarn dev` for local watch mode, or `./yarn pretest` for a one-time rebuild
 2. Refresh `http://localhost:2369/he/`
 
+# Comments (Remark42)
+
+Posts render a self-hosted [Remark42](https://remark42.com/) comment widget via
+`partials/comments-remark42.hbs`, included from `post.hbs` right after Ghost's own (currently
+unused) native `{{comments}}` block. It is post-only — not included in `page.hbs`.
+
+**Use the main [`umputun/remark42`](https://github.com/umputun/remark42) repo** — that's what this
+theme is built against. Some features referenced below (`custom_properties`-based font matching)
+started as pull requests against that repo and may not have landed/released yet. Until they do, the
+[`Bluetegu/remark42`](https://github.com/Bluetegu/remark42) fork, branch `bluetegu.me`, carries
+those changes and can be built from directly (see "Local testing" below for the `make docker`
+build-from-source steps) if you need them before the upstream PRs are merged and released.
+
+## Configuration (Ghost Admin)
+
+Set these under **Settings → Design → Post**:
+
+- **Remark42 host** (`remark42_host`) — your Remark42 backend URL, e.g. `https://comments.example.com`
+- **Remark42 site ID** (`remark42_site_id`) — the site ID configured on that backend
+- **Show comments** (`show_comments`) — on by default; a kill-switch to hide the widget site-wide
+  without a theme re-upload, e.g. during a backend outage
+
+**Locale is derived automatically, not set per post.** The partial reuses the same `{{#has
+tag="#he"}}` check `post.hbs` already uses to pick the language of related articles: posts tagged
+`#he` get `remark_config.locale = 'he'` (which the widget also renders right-to-left), everything
+else gets `'en'`. There is no manual per-post comment configuration step — tagging the post `#he`
+(which Hebrew posts already need for routing, see `routes.yaml`) is sufficient.
+
+**Remark42 has no comment pre-moderation/approval queue** — comments go live immediately; admin
+tools are all after-the-fact (delete a comment, block a user, pin, disable comments for one post).
+
+**Matching the widget's font/colors to the blog** doesn't need a Remark42 rebuild — the widget
+renders in its own iframe, but reads `remark_config.custom_properties` (any CSS custom property
+the widget's own stylesheets declare, not just colors) and applies it to its own document. Edit
+the `custom_properties` map directly in `partials/comments-remark42.hbs`. Only `--font-family` is
+supported today.
+
+## Settings moved to code (for forks)
+
+Ghost caps `config.custom` (the settings under **Settings → Design**) at 20 entries. Adding the
+three Remark42 settings above meant dropping two of the original theme's Design settings to stay
+under that cap:
+
+- **Header/footer accent color** (was `header_and_footer_color`) — whether the header and footer
+  use the site's accent color or its plain background color.
+- **Background image** (was `background_image`) — whether the Landing/Search header shows the
+  site's cover image.
+
+Both still work exactly as before, but as **code-only settings** instead of a Ghost Admin field —
+useful if you'd rather have one less admin toggle to think about, and it's how this fork prefers to
+handle settings that rarely change. If you're forking this theme and want them back as Ghost Admin
+settings instead, re-add a `boolean`/`select` entry for each under `config.custom` in `package.json`
+and swap the code literals below back to `@custom.<name>` — but note you'll then need to free up an
+equivalent number of slots elsewhere to stay at or under 20.
+
+To change either one now, edit the literal directly at each site below (all pre-wired, just flip
+`true`/`false`):
+
+- **Header/footer accent color**: `partials/components/footer.hbs` and
+  `partials/components/navigation.hbs`, the `{{#if false}} has-accent-color{{/if}}` in each file's
+  first line. Change both to `{{#if true}}` for the accent-color look; keep them in sync with each
+  other.
+- **Background image**: `partials/components/header-content.hbs`, the two `{{#if true}}` blocks
+  near the top of the file. Change both to `{{#if false}}` to hide it; keep them in sync with each
+  other.
+
+## Admin access to comments (production)
+
+Ghost's own admin login and Remark42's admin status are **completely separate systems** — there is
+no single sign-on between them, and being logged into Ghost Admin has no effect on the comments
+widget at all.
+
+To moderate comments (pin, delete, block a user) on the live site:
+
+1. Set two environment variables on the Remark42 backend: `ADMIN_SHARED_EMAIL` (a real address you
+   check) and `ADMIN_SHARED_ID` (see below for how to get this value).
+2. Whenever you want to moderate — after a "new comment" notification email, or just periodically —
+   sign in to the **comment widget itself** (on any post, or directly at
+   `https://<remark42_host>/web/`) using **email sign-in** with that same address. Once signed in,
+   admin controls appear next to every comment on the site, not just the one you signed in from.
+   The sign-in is a cookie in your browser, so you won't need to repeat this every time — only
+   after the cookie expires or on a new browser/device.
+
+### Getting `ADMIN_SHARED_ID`
+
+Remark42 identifies an email-authenticated user by `email_` followed by a plain SHA1 hash of the
+address — nothing else, no per-install secret mixed in. That means you can compute it yourself
+ahead of time instead of doing a "deploy once, sign in, copy the ID, redeploy" dance:
+
+```bash
+echo -n "you@example.com" | shasum -a 1
+# email_<that hash> is your ADMIN_SHARED_ID
+```
+
+(Or sign in once via email on a fresh deploy, click your name in the widget, and copy the ID shown
+there — same result, just an extra round trip.)
+
+**Why a plain, computable hash isn't a security problem:** the ID is a label, not a credential.
+Anyone can compute the `ADMIN_SHARED_ID` for a known email address, but that doesn't let them sign
+in as that identity — completing sign-in requires (a) actually receiving Remark42's confirmation
+link at that real inbox, and (b) that link being a token signed with the backend's own `SECRET`
+environment variable, which only your server knows. Treat `SECRET` as a real credential (a long
+random value, e.g. `openssl rand -hex 32`, never reused across installs); the `ADMIN_SHARED_ID`
+value itself doesn't need to be kept secret.
+
+### The "username" you type at sign-in
+
+The name you type into the widget's email sign-in form (e.g. "admin", your real name, anything) is
+only a **display name** — it's what's shown publicly next to your comments and replies. It has no
+effect on authentication or on whether admin controls appear; only the **email address** (via the
+ID above) determines that. You can change the display name on a future sign-in without losing
+admin status, so pick something you're fine with readers seeing attributed to your own comments,
+rather than a generic label.
+
+### Using `/web/`
+
+`https://<remark42_host>/web/` is Remark42's own demo/test page — a minimal page embedding the
+widget directly, independent of Ghost. Useful in two ways:
+
+- **Before going live**: hit `https://<remark42_host>/web/` once to sanity-check the deployment
+  end-to-end (backend up, TLS working, widget loads) without needing a real blog post to test
+  against.
+- **Any time after**: it's also a quick place to sign in as admin (see above) without navigating to
+  a specific post first — the sign-in session applies site-wide, so afterwards any post's widget on
+  the real blog already shows you as signed in.
+
+If the backend uses a self-signed certificate (local dev only — see below), visiting `/web/` once
+and clicking through the browser's certificate warning is also required before the widget will load
+on any page at all.
+
+## Local testing
+
+The widget needs a real Remark42 backend to render anything, but for local development that
+doesn't have to be the one configured in Ghost Admin above: the partial detects
+`localhost`/`127.0.0.1` and points at a local backend on `https://127.0.0.1:8443` instead,
+regardless of the Ghost Admin setting. Nothing to edit or revert.
+
+**A self-signed certificate is needed even locally** — Remark42's auth cookies require HTTPS to
+work at all, so sign-in silently fails over plain HTTP.
+
+### One-time setup
+
+Generate a self-signed cert for the loopback address:
+
+```bash
+mkdir -p certs && cd certs
+openssl req -x509 -newkey rsa:2048 -nodes -days 3650 \
+  -keyout key.pem -out cert.pem -subj "/CN=remark42-dev" \
+  -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
+cd ..
+```
+
+`ghcr.io/umputun/remark42` above is the published image, pulled automatically on first run — use
+it as-is unless you need changes not yet in a release. To test against a customized checkout
+instead, build it *before* the `docker run` below, from that checkout's own directory:
+
+```bash
+make docker   # from a checkout of https://github.com/umputun/remark42
+```
+
+This tags the result identically to the published image (`ghcr.io/umputun/remark42`, no version
+suffix), so it's picked up automatically without changing anything below — Docker prefers an
+already-present local tag over pulling.
+
+Start one Remark42 container with anonymous sign-in, email sign-in, and comment notifications all
+enabled together, plus [Mailpit](https://github.com/axllent/mailpit) as a throwaway local SMTP
+catcher so sign-in and notification emails can be read without any real mail provider — nothing
+sent here ever leaves your machine, regardless of what address you type into the widget:
+
+```bash
+docker network create remark42-dev-net   # once
+
+docker run -d --name mailpit --network remark42-dev-net \
+  -p 127.0.0.1:8025:8025 axllent/mailpit:v1.30.7
+
+docker run -d --name remark42-dev --network remark42-dev-net -p 127.0.0.1:8443:8443 \
+  -e REMARK_URL=https://127.0.0.1:8443 -e SITE=local \
+  -e SECRET=dev-only-not-a-real-secret \
+  -e SSL_TYPE=static -e SSL_PORT=8443 \
+  -e SSL_CERT=/srv/tls/cert.pem -e SSL_KEY=/srv/tls/key.pem \
+  -e AUTH_SAME_SITE=none \
+  -e AUTH_ANON=true \
+  -e AUTH_EMAIL_ENABLE=true -e AUTH_EMAIL_FROM="Comments (dev) <dev@example.com>" \
+  -e NOTIFY_ADMINS=email -e NOTIFY_USERS=email -e NOTIFY_EMAIL_FROM="Comments (dev) <notify@example.com>" \
+  -e ADMIN_SHARED_EMAIL=admin@example.com \
+  -e ADMIN_SHARED_ID=email_c530c3f4079a09f7804259002307b5e50c656d52 \
+  -e SMTP_HOST=mailpit -e SMTP_PORT=1025 \
+  -v "$PWD/var:/srv/var" -v "$PWD/certs:/srv/tls:ro" \
+  ghcr.io/umputun/remark42
+```
+
+`AUTH_SAME_SITE=none` must stay in the command on every recreation — dropping it breaks sign-in.
+`ADMIN_SHARED_ID` above is fixed to the `admin@example.com` account used in "Admin controls"
+below.
+
+Data persists in `./var` (bind-mounted), so this container is safe to stop and restart across
+sessions without losing test data.
+
+**One-time browser step:** visit `https://127.0.0.1:8443/web/` directly first and click through the
+"not secure" certificate warning ("Advanced" → "Proceed to 127.0.0.1"). Do this before loading the
+Ghost site.
+
+Then, with the local Ghost dev server running (`npm run ghost:start`), open
+`http://localhost:2369/<a post slug>/` — the widget loads against the local container
+automatically, with full sign-in/session persistence (anonymous login, logout, switching users,
+reload).
+
+### How to test each feature
+
+- **Anonymous comments** — sign in with any name in the widget and post. Works immediately.
+- **Email sign-in** — choose email in the widget, enter any address (real or not), then open
+  `http://127.0.0.1:8025` and find the message. The confirmation email doesn't carry a clickable
+  link; it shows a long token string under "please copy and paste this text into 'token' field" —
+  copy that whole string into the widget's token field to complete sign-in.
+- **Admin controls** (block user, delete comment, disable comments for a post, blocked/hidden-users
+  list) — already set up above. Choose email sign-in in the widget, use `admin@example.com` (see
+  "Email sign-in" above for completing it via Mailpit); **reload the page** after completing
+  sign-in for admin controls to appear (the widget doesn't pick up the admin flag until then). To
+  use a different admin address instead, compute `email_<sha1 of the address>` and update both
+  `ADMIN_SHARED_EMAIL` and `ADMIN_SHARED_ID` to match.
+- **Comment notifications** — post a comment and check `http://127.0.0.1:8025` for a "New comment
+  to your site" message to the admin address. Reply notifications to a commenter additionally
+  require that reader to opt into "subscribe by email" on the thread — it's not automatic.
+  `ADMIN_SHARED_EMAIL` above must be a real-looking address — already set for this reason.
+
+### Cleaning up
+
+Stop and remove both containers when done for the session:
+
+```bash
+docker rm -f remark42-dev mailpit
+```
+
+Their data (`./var`, mailpit's own in-memory inbox) is gone once each container is removed *except*
+`./var`, which is a bind mount and survives on disk — restarting the same `docker run` commands
+picks up existing comments/users again rather than starting empty.
+
+To test from a genuinely clean slate (no comments, no users, no admin ID) instead:
+
+```bash
+docker rm -f remark42-dev mailpit
+rm -rf var           # wipes all comment/user data - the actual reset
+docker network rm remark42-dev-net   # optional, only if you're done testing entirely
+```
+
+`./certs` doesn't need regenerating between runs — it's not tied to any test data, just the
+loopback address.
+
 # Copyright & License
 
 Copyright (c) 2013-2026 Ghost Foundation - Released under the [MIT license](LICENSE).

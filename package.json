@@ -105,14 +105,6 @@
                 "type": "color",
                 "default": "#ffffff"
             },
-            "header_and_footer_color": {
-                "type": "select",
-                "options": [
-                    "Background color",
-                    "Accent color"
-                ],
-                "default": "Background color"
-            },
             "title_font": {
                 "type": "select",
                 "options": [
@@ -155,13 +147,6 @@
                 "type": "text",
                 "group": "homepage",
                 "description": "Defaults to site description when empty",
-                "visibility": "header_style:[Landing, Search]"
-            },
-            "background_image": {
-                "type": "boolean",
-                "default": true,
-                "description": "Use the publication cover set on the Brand tab as your background",
-                "group": "homepage",
                 "visibility": "header_style:[Landing, Search]"
             },
             "show_featured_posts": {
@@ -214,6 +199,22 @@
                 "type": "boolean",
                 "default": true,
                 "group": "post"
+            },
+            "show_comments": {
+                "type": "boolean",
+                "default": true,
+                "group": "post",
+                "description": "Show the Remark42 comments widget on posts. See README.md for setup."
+            },
+            "remark42_host": {
+                "type": "text",
+                "group": "post",
+                "description": "Remark42 backend URL, e.g. https://comments.example.com. See README.md."
+            },
+            "remark42_site_id": {
+                "type": "text",
+                "group": "post",
+                "description": "Remark42 site ID configured on the backend. See README.md."
             }
         }
     }

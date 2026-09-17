@@ -2587,6 +2587,22 @@ figcaption a {
     margin-top: 48px;
 }
 
+.gh-comments-title {
+    display: inline-block;
+    padding-bottom: 5px;
+    font-size: 2rem;
+    border-bottom: 2px solid var(--ghost-accent-color);
+}
+
+.gh-comments-intro {
+    max-width: 720px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    color: var(--color-secondary-text);
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
 /* 18. Recent posts
 /* ---------------------------------------------------------- */
 
