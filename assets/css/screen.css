@@ -1709,7 +1709,7 @@ Search                         LOGO                    Login Subscribe
     grid-column: span 12;
 }
 
-.home-template .gh-feed:has(> :nth-child(12):last-child)~.gh-more {
+.gh-feed:has(> :nth-child(12):last-child)~.gh-more {
     display: block;
 }
 

@@ -1,6 +1,11 @@
 {{!< default}}
 {{!-- Hebrew index variant --}}
 
-<main class="gh-main">
-    {{> "components/post-list" feed="index" postFeedStyle=@custom.post_feed_style showTitle=true showSidebar=@custom.show_publication_info_sidebar postFilter="tag:[hash-he]" latestLabel="האחרונים" seeAllLabel="הצג הכל" seeAllUrl="/he/page/2/"}}
-</main>
+{{!-- This single template renders every /he/ page (Ghost's automatic
+     home/index template split only applies to the primary "/" collection),
+     so the header/featured/CTA layout is included unconditionally here and
+     the "recent"-plus-native pagination logic in post-list.hbs (feed="index")
+     is what differs by page. --}}
+{{> "components/home-content" postFilter="tag:[hash-he]" featuredLabel="מומלץ"}}
+
+{{> "components/post-list" feed="index" postFeedStyle=@custom.post_feed_style showTitle=true showSidebar=@custom.show_publication_info_sidebar postFilter="tag:[hash-he]" latestLabel="האחרונים" seeAllLabel="הצג הכל" seeAllUrl="/he/page/2/"}}

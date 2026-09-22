@@ -181,6 +181,29 @@ After changing Hebrew assets or translations:
 1. Run `./yarn dev` for local watch mode, or `./yarn pretest` for a one-time rebuild
 2. Refresh `http://localhost:2369/he/`
 
+## Adding another locale
+
+The Hebrew setup (`/he/` collection, tag `#he`) is the reference implementation for adding another
+language collection later (e.g. `/fr/`). Ghost can only auto-select a distinct "home" template for
+the *primary* `/` collection (`routes.yaml`'s `frontPageTemplate` mechanism is hardcoded to that one
+route), so every secondary locale needs a few manual wiring points instead of just dropping in a new
+`home-<locale>.hbs`:
+
+- `routes.yaml`: add a `/<locale>/` collection with `template: index-<locale>` (a single template
+  name, not an array — Ghost's per-page template selection isn't page-aware for collections with
+  more than one `template:` entry, so a `[home-<locale>, index-<locale>]` array will make the home
+  layout stick on every page instead of just page 1).
+- `index-<locale>.hbs`: a single template rendering every page of that collection (see
+  `index-he.hbs`), including `partials/components/home-content.hbs` for the header/featured/CTA
+  layout and `post-list` with `feed="index"`.
+- `locales/<locale>.json`: translated label strings (`Featured`, `Latest`, `See all`, etc.) —
+  hardcoded per-locale in the template files above rather than via the `{{t}}` helper, since `{{t}}`
+  resolves against the single site-wide `@site.locale`, not per-URL.
+- `assets/js/main.js`: the `isHomeRoute` regex inside the "Infinite scroll pagination" IIFE
+  (`pathName === '/' || /^\/he\/?$/.test(pathName)`) must be extended to also match `/<locale>/` —
+  it's what disables `pagination.js` on that collection's home page, since Ghost's own
+  `home-template` body class never applies to secondary collections either.
+
 # Comments (Remark42)
 
 Posts render a self-hosted [Remark42](https://remark42.com/) comment widget via

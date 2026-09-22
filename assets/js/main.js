@@ -180,7 +180,10 @@ function isHebrewPathname(pathName) {
 
 /* Infinite scroll pagination */
 (function () {
-    if (!document.body.classList.contains('home-template') && !document.body.classList.contains('post-template')) {
+    // Ghost only tags the primary "/" route with home-template, not the /he/ collection home.
+    const pathName = window.location.pathname || '/';
+    const isHomeRoute = pathName === '/' || /^\/he\/?$/.test(pathName);
+    if (!document.body.classList.contains('post-template') && !isHomeRoute) {
         pagination();
     }
 })();
