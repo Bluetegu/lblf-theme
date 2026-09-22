@@ -3,16 +3,12 @@ routes:
 collections:
   /:
     permalink: /{slug}/
-    template:
-      - home
-      - index
+    template: index
     filter: tag:-hash-he
 
   /he/:
     permalink: /he/{slug}/
-    template:
-      - home-he
-      - index-he
+    template: index-he
     filter: tag:hash-he
 
 taxonomies:

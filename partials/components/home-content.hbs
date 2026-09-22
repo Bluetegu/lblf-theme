@@ -1,0 +1,17 @@
+{{!--
+Shared "home page" header/featured/CTA block, included at the top of both
+home.hbs and index.hbs/index-he.hbs so every page of a collection (not just
+page 1) gets the same rich layout - only the post-list feed differs per file.
+
+Parameters:
+* postFilter (Ghost filter string scoping this collection, e.g. "tag:-[hash-he]")
+* featuredLabel (heading label for the featured section)
+--}}
+
+{{> "components/header" headerStyle=@custom.header_style postFilter=postFilter featuredLabel=featuredLabel}}
+
+{{#match @custom.header_style "!=" "Highlight"}}
+{{> "components/featured" showFeatured=@custom.show_featured_posts limit=4 postFilter=postFilter titleLabel=featuredLabel}}
+{{/match}}
+
+{{> "components/cta"}}

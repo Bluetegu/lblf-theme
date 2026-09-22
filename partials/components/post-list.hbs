@@ -125,11 +125,14 @@ Parameters:
 
             </div>
 
+            {{!-- Only page 1 shows this static link; page 2+ relies on pagination.js infinite scroll instead. --}}
             {{#match pagination.pages ">" 1}}
+            {{#match pagination.page 1}}
             <div class="gh-more is-title">
                 <a href="{{#if seeAllUrl}}{{seeAllUrl}}{{else}}{{@site.url}}/page/2/{{/if}}">{{#if
                     seeAllLabel}}{{seeAllLabel}}{{else}}{{t "See all"}}{{/if}} {{> "icons/arrow"}}</a>
             </div>
+            {{/match}}
             {{/match}}
         </main>
 

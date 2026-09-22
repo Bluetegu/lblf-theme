@@ -1,6 +1,11 @@
 {{!< default}}
 {{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
 
-<main class="gh-main">
-    {{> "components/post-list" feed="index" postFeedStyle=@custom.post_feed_style showTitle=true showSidebar=@custom.show_publication_info_sidebar postFilter="tag:-[hash-he]" latestLabel=(t "Latest") seeAllLabel=(t "See all") seeAllUrl="/page/2/"}}
-</main>
+{{!-- Ghost can only automatically switch to home.hbs for page 1 of the primary
+     "/" collection; secondary collections (see index-he.hbs) can't rely on
+     that, so both files render the same header/featured/CTA layout on every
+     page here for consistency, and only the "recent"-plus-native pagination
+     logic in post-list.hbs (feed="index") differs by page. --}}
+{{> "components/home-content" postFilter="tag:-[hash-he]" featuredLabel=(t "Featured")}}
+
+{{> "components/post-list" feed="index" postFeedStyle=@custom.post_feed_style showTitle=true showSidebar=@custom.show_publication_info_sidebar postFilter="tag:-[hash-he]" latestLabel=(t "Latest") seeAllLabel=(t "See all") seeAllUrl="/page/2/"}}
