@@ -90,7 +90,7 @@ git checkout -b rebase/<new-version> main
 git rebase --onto <new-version-tag-or-commit> <previous-base-tag> rebase/<new-version>
 ```
 
-Resolve conflicts per commit; for `assets/built/**` and `pnpm-lock.yaml`, don't hand-merge — just regenerate (`pnpm install && pnpm run build`) once the real source conflicts are resolved. Run `pnpm test` and smoke-test EN/HE routes locally before replacing `main` (the previous base tag is visible in `git log`, e.g. the `v1.7.6` commit). Before deploying the result to production, work through [`PRE-DEPLOY-CHECKLIST.md`](PRE-DEPLOY-CHECKLIST.md).
+Resolve conflicts per commit; for `assets/built/**` and `pnpm-lock.yaml`, don't hand-merge — just regenerate (`pnpm install && pnpm run build`) once the real source conflicts are resolved. Run `pnpm test` and smoke-test EN/HE routes locally before replacing `main` (the previous base tag is visible in `git log`, e.g. the `v1.7.6` commit).
 
 # Local Ghost (Isolated In This Repo)
 
