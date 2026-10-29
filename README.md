@@ -77,6 +77,21 @@ Review and publish the draft GitHub release after the command completes. The pus
 > [!NOTE]
 > `pnpm version` requires an explicit version or bump type. Run it before `pnpm ship`; the ship command does not perform the bump itself.
 
+# Rebasing on Upstream (TryGhost/Source)
+
+This theme is a customized fork of [TryGhost/Source](https://github.com/TryGhost/Source), tracked via a local `upstream` git remote (`git remote add upstream https://github.com/TryGhost/Source.git`). Upstream ships many small dependency-bump commits, so **always rebase onto a stable release tag** (`vX.Y.Z`), never an arbitrary commit.
+
+- **Routine updates**: rebase whenever upstream tags a new stable release.
+- **Security fixes**: don't wait for a tagged release — rebase onto upstream's `main` as soon as a security fix lands, even if it's only a local/unreleased commit.
+
+```bash
+git fetch upstream --tags
+git checkout -b rebase/<new-version> main
+git rebase --onto <new-version-tag-or-commit> <previous-base-tag> rebase/<new-version>
+```
+
+Resolve conflicts per commit; for `assets/built/**` and `pnpm-lock.yaml`, don't hand-merge — just regenerate (`pnpm install && pnpm run build`) once the real source conflicts are resolved. Run `pnpm test` and smoke-test EN/HE routes locally before replacing `main` (the previous base tag is visible in `git log`, e.g. the `v1.7.6` commit). Before deploying the result to production, work through [`PRE-DEPLOY-CHECKLIST.md`](PRE-DEPLOY-CHECKLIST.md).
+
 # Local Ghost (Isolated In This Repo)
 
 Run a full local Ghost dev cycle without touching your global Node setup:
