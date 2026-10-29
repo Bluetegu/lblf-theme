@@ -206,7 +206,7 @@ To change the Hebrew logo:
 
 After changing Hebrew assets or translations:
 
-1. Run `./yarn dev` for local watch mode, or `./yarn pretest` for a one-time rebuild
+1. Run `pnpm dev` for local watch mode, or `pnpm pretest` for a one-time rebuild
 2. Refresh `http://localhost:2369/he/`
 
 ## Adding another locale
